@@ -32,13 +32,13 @@
     <% } %><!--closing our for EJS FOR loop-->
     </ul><!--closing unordered list-->
 
-    <h2>Left to do: <%= left %></h2>
+    <h2>Left to do: <%= left %></h2><!--Creates a second level heading tag with text and using EJS to display a varialble showing how many tasks are left to copmlete-->
 
-    <h2>Add A Todo:</h2>
+    <h2>Add A Todo:</h2><!--Create a second layer header-->
 
-    <form action="/addTodo" method="POST">
-        <input type="text" placeholder="Thing To Do" name="todoItem">
-        <input type="submit">
+    <form action="/addTodo" method="POST"><!--Create a form with the POST method that goes to the /addTodo route-->
+        <input type="text" placeholder="Thing To Do" name="todoItem"> <!--create an input box accepting text with default text inside before user types anything with a name of todoItem-->
+        <input type="submit"><!--gives the form a Submit button-->
     </form>
     
 
