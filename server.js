@@ -39,59 +39,59 @@ app.get('/',async (request, response)=>{ //starts a GET method when the root rou
     // .catch(error => console.error(error))
 })
 
-app.post('/addTodo', (request, response) => {
-    db.collection('todos').insertOne({thing: request.body.todoItem, completed: false})
-    .then(result => {
-        console.log('Todo Added')
-        response.redirect('/')
+app.post('/addTodo', (request, response) => { //starts a POST method when the add route is passed in
+    db.collection('todos').insertOne({thing: request.body.todoItem, completed: false}) // inserts a new item into todos collection
+    .then(result => { //if insert is successful, do something
+        console.log('Todo Added') // console log option
+        response.redirect('/') // re-direct back to root
     })
-    .catch(error => console.error(error))
-})
+    .catch(error => console.error(error)) //display error if error out
+})//ending the POST
 
-app.put('/markComplete', (request, response) => {
-    db.collection('todos').updateOne({thing: request.body.itemFromJS},{
+app.put('/markComplete', (request, response) => { //PUT method when the markComplete route is passed in
+    db.collection('todos').updateOne({thing: request.body.itemFromJS},{ //look in db for one item matching the name of the item passed in from the main.js file that was clicked on
         $set: {
-            completed: true
+            completed: true // set completed status to true
           }
     },{
-        sort: {_id: -1},
-        upsert: false
+        sort: {_id: -1},//moves item to the bottom of the list
+        upsert: false//prevents insertion if item does not already exist
     })
-    .then(result => {
-        console.log('Marked Complete')
-        response.json('Marked Complete')
-    })
-    .catch(error => console.error(error))
+    .then(result => {//starts a then if update was successful
+        console.log('Marked Complete')// logging successful completion
+        response.json('Marked Complete')//sending a response back to the sender
+    })// closing .then
+    .catch(error => console.error(error))//catching error
 
-})
+})//ending put
 
-app.put('/markUnComplete', (request, response) => {
-    db.collection('todos').updateOne({thing: request.body.itemFromJS},{
+app.put('/markUnComplete', (request, response) => { //starts a PUT method when the markUncoComplete route is passed in
+    db.collection('todos').updateOne({thing: request.body.itemFromJS},{//look in db for one item matching the name of the item passed in from the main.js file that was clicked on
         $set: {
-            completed: false
+            completed: false// set completed status to false
           }
     },{
-        sort: {_id: -1},
-        upsert: false
+        sort: {_id: -1},//moves item to the bottom of the list
+        upsert: false//prevents insertion if item does not already exist
     })
-    .then(result => {
-        console.log('Marked Complete')
-        response.json('Marked Complete')
+    .then(result => { //starts a then if update was successful
+        console.log('Marked Complete') // logging successful completion 
+        response.json('Marked Complete')// sending a response back to the sender
     })
-    .catch(error => console.error(error))
+    .catch(error => console.error(error))// catching error
 
 })
 
-app.delete('/deleteItem', (request, response) => {
-    db.collection('todos').deleteOne({thing: request.body.itemFromJS})
+app.delete('/deleteItem', (request, response) => { //starts a delete method when the delete route is passed
+    db.collection('todos').deleteOne({thing: request.body.itemFromJS}) //look inside the todos collection for the ONE item that has a matching name from our JS file
     .then(result => {
-        console.log('Todo Deleted')
-        response.json('Todo Deleted')
+        console.log('Todo Deleted')//logging successful completion
+        response.json('Todo Deleted')//sending a response back to the sender
     })
-    .catch(error => console.error(error))
+    .catch(error => console.error(error))//cataching error
 
 })
 
-app.listen(process.env.PORT || PORT, ()=>{
-    console.log(`Server running on port ${PORT}`)
+app.listen(process.env.PORT || PORT, ()=>{ //setting up which port we will be listening on - either the port from the .env file or the port variable we set
+    console.log(`Server running on port ${PORT}`)//console.log the running port
 })
