@@ -1,16 +1,16 @@
-const deleteBtn = document.querySelectorAll('.fa-trash')
-const item = document.querySelectorAll('.item span')
-const itemCompleted = document.querySelectorAll('.item span.completed')
+const deleteBtn = document.querySelectorAll('.fa-trash')//creating a variable and assigning it to a selection of all elements with a class of trash can
+const item = document.querySelectorAll('.item span') //creating a variable and assigning it to a selection of span tags inside of a prent that has a class of "item"
+const itemCompleted = document.querySelectorAll('.item span.completed')// creating a variable and assigning it to a selection of spans with a class of "completed" inside of a prent with a class of "item"
 
-Array.from(deleteBtn).forEach((element)=>{
-    element.addEventListener('click', deleteItem)
-})
+Array.from(deleteBtn).forEach((element)=>{//creating an array from our selection and starting a loop
+    element.addEventListener('click', deleteItem)//add an event listener to the current item that waits for a click and then calls a function called deleteItem
+})//close our loop
 
-Array.from(item).forEach((element)=>{
-    element.addEventListener('click', markComplete)
-})
+Array.from(item).forEach((element)=>{//creating an array frmo our selection and starting a loop
+    element.addEventListener('click', markComplete)//add an event listening to the current item that waits for a click and then calls a function called markComplete
+})//close our loop
 
-Array.from(itemCompleted).forEach((element)=>{
+Array.from(itemCompleted).forEach((element)=>{//creating an array frmo our selection and starting a loop
     element.addEventListener('click', markUnComplete)
 })
 
